@@ -27,7 +27,7 @@ const ModernLoader: React.FC<ModernLoaderProps> = ({ onFinish }) => {
         'Elevate your trading experience',
     ];
 
-    // Trading chart background with bull/bear theme
+    // Trading chart background with modern teal theme
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -38,150 +38,193 @@ const ModernLoader: React.FC<ModernLoaderProps> = ({ onFinish }) => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Candlestick data
-        const candlesticks: Array<{
+        // Floating currency symbols
+        const symbols = ['$', '€', '£', '¥', '₿', '₹', '₦'];
+        const floatingSymbols: Array<{
             x: number;
             y: number;
-            height: number;
-            isBullish: boolean;
+            symbol: string;
             speed: number;
             opacity: number;
+            size: number;
+            rotation: number;
+            rotationSpeed: number;
         }> = [];
 
-        const numCandlesticks = 40;
-        for (let i = 0; i < numCandlesticks; i++) {
-            candlesticks.push({
+        for (let i = 0; i < 30; i++) {
+            floatingSymbols.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                height: Math.random() * 40 + 20,
-                isBullish: Math.random() > 0.5,
-                speed: Math.random() * 0.5 + 0.2,
-                opacity: Math.random() * 0.3 + 0.1,
+                symbol: symbols[Math.floor(Math.random() * symbols.length)],
+                speed: Math.random() * 0.3 + 0.1,
+                opacity: Math.random() * 0.2 + 0.05,
+                size: Math.random() * 30 + 20,
+                rotation: Math.random() * Math.PI * 2,
+                rotationSpeed: (Math.random() - 0.5) * 0.02,
             });
         }
 
-        // Particle system for energy effect
-        const particles: Array<{
+        // Geometric shapes (triangles and circles)
+        const shapes: Array<{
             x: number;
             y: number;
-            vx: number;
-            vy: number;
-            color: string;
             size: number;
+            type: 'triangle' | 'circle' | 'square';
+            speed: number;
+            opacity: number;
+            rotation: number;
         }> = [];
 
-        for (let i = 0; i < 50; i++) {
-            particles.push({
+        for (let i = 0; i < 20; i++) {
+            const types: ('triangle' | 'circle' | 'square')[] = ['triangle', 'circle', 'square'];
+            shapes.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 2,
-                vy: (Math.random() - 0.5) * 2,
-                color: Math.random() > 0.5 ? '#00BFFF' : '#FF4444',
-                size: Math.random() * 3 + 1,
+                size: Math.random() * 40 + 20,
+                type: types[Math.floor(Math.random() * types.length)],
+                speed: Math.random() * 0.4 + 0.2,
+                opacity: Math.random() * 0.15 + 0.05,
+                rotation: Math.random() * Math.PI * 2,
             });
         }
 
+        // Wave lines
+        const waves: Array<{
+            y: number;
+            amplitude: number;
+            frequency: number;
+            speed: number;
+            opacity: number;
+            offset: number;
+        }> = [];
+
+        for (let i = 0; i < 5; i++) {
+            waves.push({
+                y: (canvas.height / 6) * (i + 1),
+                amplitude: Math.random() * 30 + 20,
+                frequency: Math.random() * 0.01 + 0.005,
+                speed: Math.random() * 0.02 + 0.01,
+                opacity: Math.random() * 0.1 + 0.05,
+                offset: 0,
+            });
+        }
+
+        let animationFrame = 0;
+
         const draw = () => {
-            // Dark gradient background
+            animationFrame++;
+
+            // Dark teal gradient background
             const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            bgGradient.addColorStop(0, 'rgba(10, 14, 39, 0.95)');
-            bgGradient.addColorStop(0.5, 'rgba(15, 20, 25, 0.95)');
-            bgGradient.addColorStop(1, 'rgba(20, 10, 20, 0.95)');
+            bgGradient.addColorStop(0, '#0a1f1f');
+            bgGradient.addColorStop(0.5, '#0d2626');
+            bgGradient.addColorStop(1, '#0f2d2d');
             ctx.fillStyle = bgGradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Draw candlesticks
-            candlesticks.forEach(candle => {
-                ctx.globalAlpha = candle.opacity;
-
-                // Candlestick body
-                const bodyWidth = 8;
-                const wickWidth = 2;
-
-                // Draw wick
-                ctx.fillStyle = candle.isBullish ? '#00BFFF' : '#FF4444';
-                ctx.fillRect(candle.x - wickWidth / 2, candle.y - candle.height / 2, wickWidth, candle.height);
-
-                // Draw body
-                const bodyHeight = candle.height * 0.6;
-                const gradient = ctx.createLinearGradient(
-                    candle.x,
-                    candle.y - bodyHeight / 2,
-                    candle.x,
-                    candle.y + bodyHeight / 2
-                );
-
-                if (candle.isBullish) {
-                    gradient.addColorStop(0, '#00BFFF');
-                    gradient.addColorStop(1, '#0080FF');
-                } else {
-                    gradient.addColorStop(0, '#FF4444');
-                    gradient.addColorStop(1, '#CC0000');
-                }
-
-                ctx.fillStyle = gradient;
-                ctx.fillRect(candle.x - bodyWidth / 2, candle.y - bodyHeight / 2, bodyWidth, bodyHeight);
-
-                // Glow effect
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = candle.isBullish ? '#00BFFF' : '#FF4444';
-
-                // Move candlestick
-                candle.y += candle.speed;
-                if (candle.y > canvas.height + 50) {
-                    candle.y = -50;
-                    candle.x = Math.random() * canvas.width;
-                    candle.isBullish = Math.random() > 0.5;
-                }
-            });
-
-            ctx.shadowBlur = 0;
-
-            // Draw energy particles
-            particles.forEach(particle => {
-                ctx.globalAlpha = 0.6;
-                ctx.fillStyle = particle.color;
+            // Draw wave lines
+            waves.forEach(wave => {
+                ctx.globalAlpha = wave.opacity;
+                ctx.strokeStyle = '#14b8a6';
+                ctx.lineWidth = 2;
                 ctx.beginPath();
-                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                ctx.fill();
 
-                // Add glow
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = particle.color;
-                ctx.fill();
-
-                // Move particle
-                particle.x += particle.vx;
-                particle.y += particle.vy;
-
-                // Wrap around screen
-                if (particle.x < 0) particle.x = canvas.width;
-                if (particle.x > canvas.width) particle.x = 0;
-                if (particle.y < 0) particle.y = canvas.height;
-                if (particle.y > canvas.height) particle.y = 0;
-            });
-
-            ctx.globalAlpha = 1;
-            ctx.shadowBlur = 0;
-
-            // Draw connecting lines between nearby particles (energy web)
-            particles.forEach((p1, i) => {
-                particles.slice(i + 1).forEach(p2 => {
-                    const dx = p1.x - p2.x;
-                    const dy = p1.y - p2.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 150) {
-                        ctx.globalAlpha = (1 - distance / 150) * 0.2;
-                        ctx.strokeStyle = p1.color;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
+                for (let x = 0; x < canvas.width; x += 5) {
+                    const y = wave.y + Math.sin(x * wave.frequency + wave.offset) * wave.amplitude;
+                    if (x === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
                     }
-                });
+                }
+
+                ctx.stroke();
+                wave.offset += wave.speed;
             });
+
+            // Draw geometric shapes
+            shapes.forEach(shape => {
+                ctx.globalAlpha = shape.opacity;
+                ctx.fillStyle = '#14b8a6';
+                ctx.strokeStyle = '#5eead4';
+                ctx.lineWidth = 2;
+
+                ctx.save();
+                ctx.translate(shape.x, shape.y);
+                ctx.rotate(shape.rotation);
+
+                if (shape.type === 'circle') {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, shape.size / 2, 0, Math.PI * 2);
+                    ctx.stroke();
+                } else if (shape.type === 'triangle') {
+                    ctx.beginPath();
+                    ctx.moveTo(0, -shape.size / 2);
+                    ctx.lineTo(shape.size / 2, shape.size / 2);
+                    ctx.lineTo(-shape.size / 2, shape.size / 2);
+                    ctx.closePath();
+                    ctx.stroke();
+                } else if (shape.type === 'square') {
+                    ctx.strokeRect(-shape.size / 2, -shape.size / 2, shape.size, shape.size);
+                }
+
+                ctx.restore();
+
+                // Move shape
+                shape.y += shape.speed;
+                shape.rotation += 0.01;
+
+                if (shape.y > canvas.height + 50) {
+                    shape.y = -50;
+                    shape.x = Math.random() * canvas.width;
+                }
+            });
+
+            // Draw floating currency symbols
+            floatingSymbols.forEach(symbol => {
+                ctx.globalAlpha = symbol.opacity;
+                ctx.fillStyle = '#5eead4';
+                ctx.font = `${symbol.size}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                ctx.save();
+                ctx.translate(symbol.x, symbol.y);
+                ctx.rotate(symbol.rotation);
+                ctx.fillText(symbol.symbol, 0, 0);
+                ctx.restore();
+
+                // Move symbol
+                symbol.y -= symbol.speed;
+                symbol.rotation += symbol.rotationSpeed;
+
+                if (symbol.y < -50) {
+                    symbol.y = canvas.height + 50;
+                    symbol.x = Math.random() * canvas.width;
+                }
+            });
+
+            // Draw grid pattern
+            if (animationFrame % 2 === 0) {
+                ctx.globalAlpha = 0.03;
+                ctx.strokeStyle = '#14b8a6';
+                ctx.lineWidth = 1;
+
+                const gridSize = 50;
+                for (let x = 0; x < canvas.width; x += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height);
+                    ctx.stroke();
+                }
+
+                for (let y = 0; y < canvas.height; y += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(canvas.width, y);
+                    ctx.stroke();
+                }
+            }
 
             ctx.globalAlpha = 1;
         };
@@ -386,8 +429,8 @@ const ModernLoader: React.FC<ModernLoaderProps> = ({ onFinish }) => {
 
                 {/* Brand name */}
                 <h1 className='zeus-loader__brand'>
-                    <span className='zeus-loader__brand-zeus'>LEILA</span>
-                    <span className='zeus-loader__brand-trading'>FX</span>
+                    <span className='zeus-loader__brand-zeus'>TRADE WITH</span>
+                    <span className='zeus-loader__brand-trading'>TAIFA</span>
                 </h1>
 
                 <p className='zeus-loader__tagline'>Professional Trading Platform</p>

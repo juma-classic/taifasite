@@ -1,11 +1,11 @@
-// TAIFA Loader - Bull vs Bear Theme
+// TAIFA Loader - Modern Teal Theme
 .zeus-loader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(135deg, #0a0e27 0%, #0f1419 50%, #140a14 100%);
+    background: linear-gradient(135deg, #0a1f1f 0%, #0d2626 50%, #0f2d2d 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +23,7 @@
         z-index: 1;
     }
 
-    // Lightning flash effect (now bull/bear energy flash)
+    // Lightning flash effect (now teal energy flash)
     &__lightning-flash {
         position: absolute;
         top: 0;
@@ -31,14 +31,9 @@
         width: 100%;
         height: 100%;
         background: radial-gradient(
-            circle at 30% 50%,
-            rgba(0, 191, 255, 0.2) 0%,
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 70% 50%,
-            rgba(255, 68, 68, 0.2) 0%,
-            transparent 40%
+            circle at 50% 50%,
+            rgba(20, 184, 166, 0.3) 0%,
+            transparent 50%
         );
         opacity: 0;
         pointer-events: none;
@@ -51,7 +46,7 @@
         }
     }
 
-    // Storm clouds background (now bull/bear energy clouds)
+    // Storm clouds background (now teal energy clouds)
     &__storm-bg {
         position: absolute;
         top: 0;
@@ -72,7 +67,7 @@
             height: 200px;
             top: 10%;
             left: -10%;
-            background: radial-gradient(ellipse, rgba(0, 127, 255, 0.3) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(20, 184, 166, 0.2) 0%, transparent 70%);
             animation-delay: 0s;
         }
 
@@ -81,7 +76,7 @@
             height: 250px;
             top: 20%;
             right: -15%;
-            background: radial-gradient(ellipse, rgba(255, 68, 68, 0.3) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(94, 234, 212, 0.15) 0%, transparent 70%);
             animation-delay: 5s;
         }
 
@@ -90,7 +85,7 @@
             height: 220px;
             bottom: 15%;
             left: 20%;
-            background: radial-gradient(ellipse, rgba(0, 191, 255, 0.2) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(45, 212, 191, 0.18) 0%, transparent 70%);
             animation-delay: 10s;
         }
     }
@@ -131,13 +126,13 @@
 
     &__logo-letter {
         display: inline-block;
-        background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B00 100%);
+        background: linear-gradient(135deg, #14b8a6 0%, #5eead4 50%, #2dd4bf 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
-        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) 
-                drop-shadow(0 0 40px rgba(255, 165, 0, 0.6));
+        text-shadow: 0 0 30px rgba(20, 184, 166, 0.8);
+        filter: drop-shadow(0 0 20px rgba(20, 184, 166, 0.8)) 
+                drop-shadow(0 0 40px rgba(94, 234, 212, 0.6));
         animation: letterPulse 2s infinite ease-in-out;
         
         &:nth-child(1) { animation-delay: 0s; }
@@ -163,7 +158,7 @@
         transform: translate(-50%, -50%);
         width: 250px;
         height: 250px;
-        background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(20, 184, 166, 0.4) 0%, transparent 70%);
         border-radius: 50%;
         animation: glowPulse 2s infinite ease-in-out;
         pointer-events: none;
@@ -171,7 +166,7 @@
         &--secondary {
             width: 350px;
             height: 350px;
-            background: radial-gradient(circle, rgba(65, 105, 225, 0.3) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(94, 234, 212, 0.3) 0%, transparent 70%);
             animation-delay: 1s;
         }
     }
@@ -254,30 +249,30 @@
     }
 
     &__brand-zeus {
-        color: #FFD700;
-        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
+        color: #14b8a6;
+        text-shadow: 0 0 20px rgba(20, 184, 166, 0.8), 0 0 40px rgba(20, 184, 166, 0.5);
         animation: textGlow 2s infinite alternate;
     }
 
     &__brand-trading {
-        color: #4169E1;
+        color: #5eead4;
         font-size: 2rem;
-        text-shadow: 0 0 15px rgba(65, 105, 225, 0.8);
+        text-shadow: 0 0 15px rgba(94, 234, 212, 0.8);
     }
 
     &__brand-hub {
-        color: #00BFFF;
+        color: #2dd4bf;
         font-size: 2rem;
-        text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+        text-shadow: 0 0 15px rgba(45, 212, 191, 0.8);
     }
 
     &__tagline {
-        color: #FFD700;
+        color: #14b8a6;
         font-size: 1.2rem;
         font-weight: 600;
         text-align: center;
         margin: 0;
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        text-shadow: 0 0 10px rgba(20, 184, 166, 0.6);
         animation: taglinePulse 3s infinite ease-in-out;
     }
 
@@ -305,16 +300,16 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 0.5rem;
-        color: #FFD700;
+        color: #14b8a6;
         font-size: 0.9rem;
         font-weight: 600;
-        text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        text-shadow: 0 0 5px rgba(20, 184, 166, 0.5);
     }
 
     &__progress-bar {
         width: 100%;
         height: 8px;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(20, 184, 166, 0.1);
         border-radius: 10px;
         overflow: hidden;
         position: relative;
@@ -323,11 +318,11 @@
 
     &__progress-fill {
         height: 100%;
-        background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FF6B00 100%);
+        background: linear-gradient(90deg, #14b8a6 0%, #2dd4bf 50%, #5eead4 100%);
         border-radius: 10px;
         position: relative;
         transition: width 0.3s ease-out;
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        box-shadow: 0 0 15px rgba(20, 184, 166, 0.8);
         animation: progressGlow 1.5s infinite alternate;
     }
 
@@ -352,8 +347,8 @@
         align-items: center;
         gap: 0.8rem;
         padding: 1rem 1.5rem;
-        background: rgba(255, 215, 0, 0.1);
-        border: 1px solid rgba(255, 215, 0, 0.3);
+        background: rgba(20, 184, 166, 0.1);
+        border: 1px solid rgba(20, 184, 166, 0.3);
         border-radius: 12px;
         backdrop-filter: blur(10px);
         max-width: 500px;
@@ -370,7 +365,7 @@
         svg {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+            filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.6));
         }
     }
 
@@ -418,11 +413,11 @@
     0%,
     100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+        filter: drop-shadow(0 0 20px rgba(20, 184, 166, 0.8));
     }
     50% {
         transform: scale(1.05);
-        filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1));
+        filter: drop-shadow(0 0 30px rgba(20, 184, 166, 1));
     }
 }
 
@@ -430,13 +425,13 @@
     0%,
     100% {
         transform: translateY(0) scale(1);
-        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) 
-                drop-shadow(0 0 40px rgba(255, 165, 0, 0.6));
+        filter: drop-shadow(0 0 20px rgba(20, 184, 166, 0.8)) 
+                drop-shadow(0 0 40px rgba(94, 234, 212, 0.6));
     }
     50% {
         transform: translateY(-10px) scale(1.1);
-        filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1)) 
-                drop-shadow(0 0 60px rgba(255, 165, 0, 0.8));
+        filter: drop-shadow(0 0 30px rgba(20, 184, 166, 1)) 
+                drop-shadow(0 0 60px rgba(94, 234, 212, 0.8));
     }
 }
 
@@ -501,10 +496,10 @@
 
 @keyframes textGlow {
     0% {
-        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
+        text-shadow: 0 0 20px rgba(20, 184, 166, 0.8), 0 0 40px rgba(20, 184, 166, 0.5);
     }
     100% {
-        text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 215, 0, 0.8);
+        text-shadow: 0 0 30px rgba(20, 184, 166, 1), 0 0 60px rgba(20, 184, 166, 0.8);
     }
 }
 
@@ -520,10 +515,10 @@
 
 @keyframes progressGlow {
     0% {
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        box-shadow: 0 0 15px rgba(20, 184, 166, 0.8);
     }
     100% {
-        box-shadow: 0 0 25px rgba(255, 215, 0, 1), 0 0 35px rgba(255, 165, 0, 0.8);
+        box-shadow: 0 0 25px rgba(20, 184, 166, 1), 0 0 35px rgba(94, 234, 212, 0.8);
     }
 }
 

@@ -1967,8 +1967,8 @@ const AppWrapper = observer(() => {
                         >
                             <DCircles />
                         </div>
-                        {/* HACKS ANALYSIS TAB */}
-                        <div
+                        {/* HACKS ANALYSIS TAB - TEMPORARILY HIDDEN */}
+                        {/* <div
                             label={
                                 <>
                                     <HacksAnalysisIcon />
@@ -1999,7 +1999,7 @@ const AppWrapper = observer(() => {
                                     sandbox='allow-same-origin allow-scripts allow-forms allow-popups allow-modals'
                                 />
                             </div>
-                        </div>
+                        </div> */}
                         {/* CHARTS TAB */}
                         <div
                             label={
@@ -2597,8 +2597,8 @@ const AppWrapper = observer(() => {
                             </div>
                         </div>
                         {/* ZEUS ANALYSIS TAB - MOVED TO ANALYSIS TOOL */}
-                        {/* SIGNALS TAB */}
-                        <div
+                        {/* SIGNALS TAB - TEMPORARILY HIDDEN */}
+                        {/* <div
                             label={
                                 <>
                                     <SignalsIcon />
@@ -2609,7 +2609,7 @@ const AppWrapper = observer(() => {
                             id='id-signals'
                         >
                             <ProtectedSignalsCenter />
-                        </div>
+                        </div> */}
                         {/* FREE BOTS TAB */}
                         <div
                             label={
