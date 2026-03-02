@@ -13,7 +13,7 @@ export const AppLogo = () => {
             rel='noopener noreferrer'
             className='app-header__logo leila-fx-logo'
         >
-            <span className='leila-fx-text'>LEILA FX</span>
+            <span className='leila-fx-text'>TAIFA</span>
         </a>
     );
 };

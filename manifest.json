@@ -1,8 +1,8 @@
 {
-    "name": "LEILA FX",
-    "short_name": "LEILA FX",
+    "name": "TAIFA",
+    "short_name": "TAIFA",
     "theme_color": "#14b8a6",
-    "description": "Professional automated trading platform - Reliable trading tools by LEILA FX.",
+    "description": "Professional automated trading platform - Reliable trading tools by TAIFA.",
     "background_color": "#0f1419",
     "display": "standalone",
     "start_url": "/",

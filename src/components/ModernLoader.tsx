@@ -23,7 +23,7 @@ const ModernLoader: React.FC<ModernLoaderProps> = ({ onFinish }) => {
         'Navigate markets with confidence',
         'Fast execution, reliable returns',
         'Growing your portfolio steadily',
-        'LEILA FX - Your path to financial freedom',
+        'TAIFA - Your path to financial freedom',
         'Elevate your trading experience',
     ];
 
@@ -204,7 +204,7 @@ const ModernLoader: React.FC<ModernLoaderProps> = ({ onFinish }) => {
             { duration: 900, text: 'Activating Trading Signals', progress: 70 },
             { duration: 700, text: 'Loading Strategies', progress: 85 },
             { duration: 600, text: 'Preparing Dashboard', progress: 95 },
-            { duration: 500, text: 'Welcome to LEILA FX', progress: 100 },
+            { duration: 500, text: 'Welcome to TAIFA', progress: 100 },
         ];
 
         let currentPhase = 0;
@@ -282,13 +282,15 @@ const ModernLoader: React.FC<ModernLoaderProps> = ({ onFinish }) => {
 
             {/* Main content */}
             <div className='zeus-loader__content'>
-                {/* LEILA FX Logo */}
+                {/* TAIFA Logo */}
                 <div className='zeus-loader__logo-container'>
-                    <img 
-                        src='/leilafxlogo.png' 
-                        alt='LEILA FX Logo' 
-                        className='zeus-loader__logo'
-                    />
+                    <div className='zeus-loader__logo-text'>
+                        <span className='zeus-loader__logo-letter'>T</span>
+                        <span className='zeus-loader__logo-letter'>A</span>
+                        <span className='zeus-loader__logo-letter'>I</span>
+                        <span className='zeus-loader__logo-letter'>F</span>
+                        <span className='zeus-loader__logo-letter'>A</span>
+                    </div>
                     <div className='zeus-loader__logo-glow' />
                     <div className='zeus-loader__logo-glow zeus-loader__logo-glow--secondary' />
                 </div>

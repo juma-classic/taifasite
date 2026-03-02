@@ -43,7 +43,7 @@ const DTraderIframe: React.FC<DTraderIframeProps> = ({ className = '' }) => {
                 token1: authToken,
                 cur1: currency,
                 lang: 'EN',
-                app_id: '119554', // Your LEILA FX app ID
+                app_id: '119554', // Your TAIFA app ID
             });
 
             const url = `https://deriv-dtrader.vercel.app/dtrader?${params.toString()}`;
