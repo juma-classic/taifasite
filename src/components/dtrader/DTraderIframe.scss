@@ -1,0 +1,429 @@
+// LEILA FX - DTrader Integration Styles
+.dtrader-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: visible;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    // Desktop: Reduce top padding to move container lower by 40px and add right padding
+    margin-top: 25px;
+    padding-right: 645px;
+    
+    // Mobile: Add padding at bottom to prevent content being hidden by Run button
+    @media (max-width: 768px) {
+        margin-top: 0; // Reset margin on mobile
+        padding-right: 0; // Reset right padding on mobile
+        padding-bottom: 45px; // Reduced by 15px from 60px
+        overflow-y: auto; // Enable scrolling
+        -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+    }
+}
+
+.dtrader-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+    border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+    }
+
+    &__icon {
+        font-size: 1.5rem;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    &__reload {
+        background: rgba(255, 215, 0, 0.1);
+        border: 2px solid rgba(255, 215, 0, 0.3);
+        color: #FFD700;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.25rem;
+        font-weight: 700;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
+            transform: rotate(180deg);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+
+        &:active {
+            transform: rotate(180deg) scale(0.95);
+        }
+    }
+}
+
+.dtrader-iframe {
+    width: 100%;
+    flex: 1;
+    border: none;
+    background: #ffffff;
+    
+    // Desktop: Use most of viewport with constraints (no header now, so less to subtract)
+    height: calc(100vh - 60px);
+    min-height: 500px; // Safety minimum for usability
+    max-height: 1400px; // Prevent excessive height on huge screens
+    
+    // Tablet: Slightly less space for better proportions
+    @media (max-width: 1024px) and (min-width: 769px) {
+        height: calc(100vh - 50px);
+        max-height: 1000px;
+    }
+    
+    // Mobile: Account for dynamic browser chrome (address bar) and Run button
+    @media (max-width: 768px) {
+        // Use dynamic viewport height if supported (modern browsers)
+        @supports (height: 100dvh) {
+            height: calc(100dvh - 40px);
+            min-height: calc(100dvh - 40px); // Ensure full height
+        }
+        
+        // Fallback for older browsers
+        @supports not (height: 100dvh) {
+            height: calc(100vh - 40px);
+            min-height: calc(100vh - 40px);
+        }
+        
+        // Allow iframe content to be scrollable
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        
+        // Add extra space at bottom for Run button - increased to prevent overlap
+        padding-bottom: 150px;
+        box-sizing: border-box;
+    }
+    
+    // Extra small mobile devices
+    @media (max-width: 480px) {
+        @supports (height: 100dvh) {
+            height: calc(100dvh - 30px);
+            min-height: calc(100dvh - 30px);
+        }
+        
+        @supports not (height: 100dvh) {
+            height: calc(100vh - 30px);
+            min-height: calc(100vh - 30px);
+        }
+        
+        padding-bottom: 180px; // More space on smaller screens
+    }
+    
+    // Mobile landscape: Maximize horizontal space
+    @media (max-width: 768px) and (orientation: landscape) {
+        @supports (height: 100dvh) {
+            height: calc(100dvh - 20px);
+        }
+        
+        @supports not (height: 100dvh) {
+            height: calc(100vh - 20px);
+        }
+        
+        min-height: 350px;
+        padding-bottom: 80px;
+    }
+}
+
+// Loading State
+.dtrader-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    // Match iframe dynamic height (adjusted for no header)
+    height: calc(100vh - 60px);
+    min-height: 500px;
+    max-height: 1400px;
+    
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+    border-radius: 8px;
+    
+    // Tablet adjustments
+    @media (max-width: 1024px) and (min-width: 769px) {
+        height: calc(100vh - 50px);
+        max-height: 1000px;
+    }
+    
+    // Mobile adjustments
+    @media (max-width: 768px) {
+        @supports (height: 100dvh) {
+            height: calc(100dvh - 40px);
+        }
+        
+        @supports not (height: 100dvh) {
+            height: calc(100vh - 40px);
+        }
+        
+        min-height: 450px;
+        max-height: none;
+    }
+    
+    @media (max-width: 480px) {
+        @supports (height: 100dvh) {
+            height: calc(100dvh - 30px);
+        }
+        
+        @supports not (height: 100dvh) {
+            height: calc(100vh - 30px);
+        }
+        
+        min-height: 400px;
+    }
+    
+    @media (max-width: 768px) and (orientation: landscape) {
+        @supports (height: 100dvh) {
+            height: calc(100dvh - 20px);
+        }
+        
+        @supports not (height: 100dvh) {
+            height: calc(100vh - 20px);
+        }
+        
+        min-height: 350px;
+    }
+
+    &__spinner {
+        margin-bottom: 1.5rem;
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 215, 0, 0.2);
+            border-top-color: #FFD700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+    }
+
+    &__text {
+        color: #FFD700;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        animation: pulse 2s ease-in-out infinite;
+    }
+}
+
+// Error State
+.dtrader-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    // Match iframe dynamic height (adjusted for no header)
+    height: calc(100vh - 60px);
+    min-height: 500px;
+    max-height: 1400px;
+    
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    
+    // Tablet adjustments
+    @media (max-width: 1024px) and (min-width: 769px) {
+        height: calc(100vh - 50px);
+        max-height: 1000px;
+    }
+    
+    // Mobile adjustments
+    @media (max-width: 768px) {
+        @supports (height: 100dvh) {
+            height: calc(100dvh - 40px);
+        }
+        
+        @supports not (height: 100dvh) {
+            height: calc(100vh - 40px);
+        }
+        
+        min-height: 450px;
+        max-height: none;
+        padding: 1.5rem;
+    }
+    
+    @media (max-width: 480px) {
+        @supports (height: 100dvh) {
+            height: calc(100dvh - 30px);
+        }
+        
+        @supports not (height: 100dvh) {
+            height: calc(100vh - 30px);
+        }
+        
+        min-height: 400px;
+        padding: 1rem;
+    }
+    
+    @media (max-width: 768px) and (orientation: landscape) {
+        @supports (height: 100dvh) {
+            height: calc(100dvh - 20px);
+        }
+        
+        @supports not (height: 100dvh) {
+            height: calc(100vh - 20px);
+        }
+        
+        min-height: 350px;
+    }
+
+    &__icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: shake 0.5s ease-in-out;
+    }
+
+    &__title {
+        color: #FFD700;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 1rem 0;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    &__message {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 1rem;
+        margin: 0 0 2rem 0;
+        max-width: 400px;
+    }
+
+    &__button {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        border: none;
+        color: #000000;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+
+// Animations
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+// Responsive Design - Header adjustments
+@media (max-width: 768px) {
+    .dtrader-header {
+        padding: 0.75rem 1rem;
+
+        &__title {
+            h2 {
+                font-size: 1rem;
+            }
+        }
+
+        &__icon {
+            font-size: 1.25rem;
+        }
+
+        &__reload {
+            padding: 0.4rem 0.8rem;
+            font-size: 1rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .dtrader-header {
+        padding: 0.5rem 0.75rem;
+        
+        &__title {
+            gap: 0.5rem;
+            
+            h2 {
+                font-size: 0.9rem;
+            }
+        }
+        
+        &__icon {
+            font-size: 1.1rem;
+        }
+        
+        &__reload {
+            padding: 0.35rem 0.7rem;
+            font-size: 0.9rem;
+        }
+    }
+}
+
+// Mobile landscape optimization
+@media (max-width: 768px) and (orientation: landscape) {
+    .dtrader-header {
+        padding: 0.5rem 1rem;
+        
+        &__title {
+            h2 {
+                font-size: 0.9rem;
+            }
+        }
+        
+        &__icon {
+            font-size: 1.1rem;
+        }
+        
+        &__reload {
+            padding: 0.35rem 0.7rem;
+            font-size: 0.9rem;
+        }
+    }
+}
